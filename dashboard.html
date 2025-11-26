@@ -1,0 +1,23 @@
+<h2>Áreas Danificadas</h2>
+
+<form method="POST" action="/adicionar">
+  <input name="nome" placeholder="Nome da região"><br>
+  <input name="descricao" placeholder="Descrição"><br>
+  <select name="prioridade">
+    <option>Baixa</option>
+    <option>Média</option>
+    <option>Alta</option>
+  </select><br>
+  <button type="submit">Adicionar</button>
+</form>
+
+<br>
+
+<h3>Lista de áreas</h3>
+{% for item in lista %}
+  <p>
+    <strong>{{ item.nome }}</strong> - {{ item.descricao }} ({{ item.prioridade }})
+  </p>
+{% endfor %}
+
+<a href="/logout">Sair</a>
