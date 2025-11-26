@@ -15,7 +15,7 @@ user_db = {
 # ---------------- LOGIN ----------------
 @app.route("/", methods=["GET", "POST"])
 def login():
-    if request.method == "POST":
+    if request.method == "POST":        #Envia informações para o servidor.
         usuario = request.form["usuario"]
         senha = request.form["senha"]
 
@@ -28,7 +28,7 @@ def login():
 
     return render_template("login.html")
 
-# -------------- DASHBOARD ----------------
+# -------------- DASHBOARD ---------------- #Exibe registros cadastrados/só pode ser acessado por usuários autenticados.
 @app.route("/dashboard")
 def dashboard():
     if not session.get("logado"):  # Segurança: proteção de rota e controle de acesso (A01)
@@ -74,6 +74,7 @@ def excluir(indice):
     return redirect("/dashboard")
 
 app.run(debug=True)
+
 
 
 
