@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, redirect, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = "chave_super_secreta_123"  # Protege sessões (OWASP A07)
+app.secret_key = "chave_super_secreta_123"  # Protege sessões e os cookies (OWASP A07)
 
 # Banco de dados simples em memória
 areas = []
@@ -19,7 +19,7 @@ def login():
         usuario = request.form["usuario"]
         senha = request.form["senha"]
 
-        # Segurança OWASP: verificar hash da senha (A02 - cryptografia)
+        # Segurança OWASP: verificar hash da senha (A02 - cryptografia para evitar exposição de dados sensíveis)
         if usuario in user_db and check_password_hash(user_db[usuario], senha):
             session["logado"] = True
             return redirect("/dashboard")
@@ -31,7 +31,7 @@ def login():
 # -------------- DASHBOARD ----------------
 @app.route("/dashboard")
 def dashboard():
-    if not session.get("logado"):  # Segurança: proteção de rota (A01)
+    if not session.get("logado"):  # Segurança: proteção de rota e controle de acesso (A01)
         return redirect("/")
     return render_template("dashboard.html", lista=areas)
 
@@ -45,13 +45,13 @@ def adicionar():
     descricao = request.form["descricao"]
     prioridade = request.form["prioridade"]
 
-    # Segurança OWASP: validação de entradas (A05)
+    # Segurança OWASP: validação de entradas (Para evitar erro de configuração de segurança - A05)
     if len(nome) == 0 or len(descricao) == 0:
         return "Campos inválidos!"
 
     nova_area = {
         "nome": nome,
-        "descricao": descricao.replace("<", "&lt;"),  # sanitização contra XSS (A03)
+        "descricao": descricao.replace("<", "&lt;"),  # sanitização contra XSS (Evitar injeção de código malicioso - A03)
         "prioridade": prioridade
     }
 
@@ -74,4 +74,5 @@ def excluir(indice):
     return redirect("/dashboard")
 
 app.run(debug=True)
+
 
