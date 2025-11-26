@@ -14,7 +14,7 @@ Auxiliar a cidade de Rio Bonito do Iguaçu na reconstrução após o tornado, pe
 - Listar todos os registros
 - Controlar o acesso via login
 
-O sistema foi desenvolvido com **Python + Flask**, utilizando estrutura simples para facilitar explicação e apresentação.
+O sistema foi desenvolvido com **Python + Flask**;
 
 ---
 
