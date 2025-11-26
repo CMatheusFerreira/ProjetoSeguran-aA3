@@ -63,5 +63,15 @@ def adicionar():
 def logout():
     session.clear()
     return redirect("/")
+@app.route("/excluir/<int:indice>")
+def excluir(indice):
+    if not session.get("logado"):
+        return redirect("/")
+
+    if 0 <= indice < len(areas):
+        areas.pop(indice)
+
+    return redirect("/dashboard")
 
 app.run(debug=True)
+
