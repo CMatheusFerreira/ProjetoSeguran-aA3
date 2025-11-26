@@ -1,5 +1,5 @@
-from flask import Flask, request, render_template, redirect, session
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Flask, request, render_template, redirect, session          #Flask para aplicações Web
+from werkzeug.security import generate_password_hash, check_password_hash     #permite criptografar as senhas
 
 app = Flask(__name__)
 app.secret_key = "chave_super_secreta_123"  # Protege sessões e os cookies (OWASP A07)
@@ -74,5 +74,6 @@ def excluir(indice):
     return redirect("/dashboard")
 
 app.run(debug=True)
+
 
 
