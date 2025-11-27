@@ -9,7 +9,7 @@ areas = []
 
 # Usuário padrão do sistema
 user_db = {
-    "admin": generate_password_hash("1234")
+    "admin": "scrypt:32768:8:1$wsusPRQ5YdopHztx$6ef99caab38c5473fe60719cb4380bcba6c754a525883b825095de9bf638bab8b15cebdb302b9333264d70c07e6ddf0361c1919fdcc50795d336543965fbdf7d"
 }
 
 # ---------------- LOGIN ----------------
@@ -74,6 +74,7 @@ def excluir(indice):
     return redirect("/dashboard")
 
 app.run(debug=True)
+
 
 
 
